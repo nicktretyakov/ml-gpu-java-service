@@ -1,0 +1,112 @@
+syntax = "proto3";
+
+package ml;
+
+option java_package = "com.mlhybrid.grpc";
+option java_multiple_files = true;
+option java_outer_classname = "MLProto";
+
+service ML {
+  // Compute service takes a data array and returns processed results
+  rpc Compute (ComputeRequest) returns (ComputeResponse);
+
+  // Matrix compute service for matrix operations
+  rpc MatrixCompute (MatrixComputeRequest) returns (MatrixComputeResponse);
+
+  // Status service returns information about the GPU compute server
+  rpc Status (StatusRequest) returns (StatusResponse);
+}
+
+// Request for computation
+message ComputeRequest {
+  // Input data array of float values
+  repeated float data = 1;
+
+  // Task ID for tracking
+  string task_id = 2;
+
+  // Type of computation to perform (e.g., "matrix_multiply", "vector_add", etc.)
+  string task_type = 3;
+}
+
+// Response from computation
+message ComputeResponse {
+  // Result data array
+  repeated float result = 1;
+
+  // Task ID for tracking
+  string task_id = 2;
+
+  // Status of the computation
+  string status = 3;
+
+  // Execution time in milliseconds
+  int64 execution_time_ms = 4;
+}
+
+// Matrix representation
+message Matrix {
+  // Number of rows
+  int32 rows = 1;
+
+  // Number of columns
+  int32 cols = 2;
+
+  // Data in row-major order (flattened 2D array)
+  repeated float data = 3;
+}
+
+// Request for matrix computation
+message MatrixComputeRequest {
+  // First matrix (required for all operations)
+  Matrix matrix_a = 1;
+
+  // Second matrix (required for operations like multiplication)
+  Matrix matrix_b = 2;
+
+  // Task ID for tracking
+  string task_id = 3;
+
+  // Type of matrix operation to perform
+  // Supported types: "multiply", "transpose", "inverse", "add", "subtract"
+  string operation = 4;
+}
+
+// Response from matrix computation
+message MatrixComputeResponse {
+  // Resulting matrix
+  Matrix result = 1;
+
+  // Task ID for tracking
+  string task_id = 2;
+
+  // Status of the computation
+  string status = 3;
+
+  // Execution time in milliseconds
+  int64 execution_time_ms = 4;
+
+  // Error message, if any
+  string error_message = 5;
+}
+
+// Simple request for status information
+message StatusRequest {
+  // Optional client identifier
+  string client_id = 1;
+}
+
+// Response with system status information
+message StatusResponse {
+  // Whether the system is ready to accept compute tasks
+  bool ready = 1;
+
+  // GPU device information
+  string gpu_info = 2;
+
+  // Current load (0.0 to 1.0)
+  float current_load = 3;
+
+  // Optional error message if system is not ready
+  string error = 4;
+}

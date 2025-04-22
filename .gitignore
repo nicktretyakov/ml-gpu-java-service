@@ -1,0 +1,78 @@
+# Rust specific ignores
+/rust-server/target/
+/rust-server/Cargo.lock
+/rust-server/**/*.rs.bk
+/rust-server/.cargo/
+
+# Java specific ignores
+/java-server/target/
+/java-server/.settings/
+/java-server/.classpath
+/java-server/.project
+/java-server/bin/
+/java-server/.mvn/
+/java-server/mvnw
+/java-server/mvnw.cmd
+/java-server/*.iml
+
+# IDE specific
+.idea/
+.vscode/
+*.code-workspace
+*.sublime-workspace
+*.sublime-project
+
+# OS specific
+.DS_Store
+Thumbs.db
+.directory
+desktop.ini
+
+# Dependency directories
+/node_modules/
+
+# Logs and databases
+*.log
+*.sqlite
+*.sqlite3
+*.db
+logs/
+log/
+
+# Build artifacts
+dist/
+build/
+out/
+bin/
+*.class
+*.jar
+*.war
+*.ear
+
+# Protobuf generated files
+*/generated-sources/
+
+# Environment files
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Backup files
+*~
+*.bak
+*.swp
+*.swo
+
+# Temp files
+temp/
+tmp/
+.temp/
+.tmp/
+
+# Coverage reports
+coverage/
+.coverage
+htmlcov/
+.nyc_output/

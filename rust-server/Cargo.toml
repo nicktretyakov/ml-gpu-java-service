@@ -1,0 +1,37 @@
+[package]
+name = "ml-gpu-service"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+tonic = "0.8"
+prost = "0.11"
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
+wgpu = "0.14"
+futures = "0.3"
+async-stream = "0.3"
+rand = "0.8"
+log = "0.4"
+env_logger = "0.10"
+chrono = "0.4"
+
+[build-dependencies]
+tonic-build = "0.8"
+
+[[bin]]
+name = "ml-server"
+path = "src/main.rs"
+
+[[bin]]
+name = "ml-client"
+path = "src/client.rs"
+
+[[bin]]
+name = "ml-matrix-client"
+path = "src/bin/ml-matrix-client.rs"
+
+[lib]
+name = "ml_gpu_service_lib"
+path = "src/lib.rs"
+
+default-run = "ml-server"
